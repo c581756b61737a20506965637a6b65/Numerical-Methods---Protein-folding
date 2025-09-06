@@ -1,43 +1,34 @@
-# Numerical-Methods---Protein-folding
+# Protein Folding – HP Lattice Model in 3D
 
-This program was developed as a project for the Numerical Methods course. It simulates simplified protein folding using the HP lattice model in 3D space. The folding process is modeled using the Metropolis algorithm with simulated annealing to find a conformation with minimal energy.
+This repository contains a protein folding simulator based on the HP lattice model using the Metropolis algorithm with simulated annealing. The project was developed for the *Numerical Methods* course and focuses on predicting a low-energy 3D structure of the **ubiquitin** protein on a discrete cubic lattice.
 
-## Dependencies
+---
 
-The project requires the following tools and libraries to build and run:
-- **CMake**: For managing the build process.
-- **GCC**: The GNU Compiler Collection for compiling the code.
-- **GDB**: GNU Debugger for debugging (optional but recommended).
-- **Nix**: For reproducible development environments (flake configuration provided).
+## 🧰 Dependencies
 
-## Project Structure and Components
+- **GCC** – C++ compiler
+- **CMake** – Build system
+- **GDB** – Optional debugger
+- **Nix** – Reproducible environment (`flake.nix` provided)
 
-The project is divided into the following main components:
+---
 
-1. **Vec3**:
-   - A lightweight structure to represent 3D coordinates of amino acids on the lattice.
-   - Provides utility functions for vector operations and hashing, enabling efficient use in data structures.
+## 📁 Project Structure
 
-2. **HP_model**:
-   - Implements the core simulation logic for the HP lattice model.
-   - Handles the initialization of protein conformations, energy calculations, and the implementation of moves (end move, corner rotation, crankshaft move).
-   - Encapsulates the Metropolis algorithm and simulated annealing process for energy minimization.
+- `Vec3.*` – 3D coordinate representation with vector operations and hashing
+- `HP_model.*` – Core logic: folding simulation, energy evaluation, conformational moves
+- `Main.cpp` – Entry point: initializes simulation and outputs the result
+- `CMakeLists.txt` – Build configuration
+- `Out/` – Output folder with plots and structure visualization
 
-3. **Main**:
-   - The entry point of the program.
-   - Invokes the `HP_model` to initialize the protein, run the folding simulation, and save the final conformation to a text file.
-   - Designed for straightforward execution and output analysis.
+---
 
-4. **CMakeLists.txt**:
-   - Configures the build process for the project.
-   - Ensures that all dependencies are linked and compiles the source code into an executable.
+## ⚙️ How to Build & Run
 
-## How to Build and Run
+```bash
+nix develop           # optional, sets up the environment
+cmake -S . -B build
+cmake --build build
+./build/ProteinFolding
 
-1. Use `nix develop` to set up the development environment.
-2. Run `cmake -S . -B build` to generate build files.
-3. Execute `cmake --build build` to compile the source code.
-4. Run the program using `./build/ProteinFolding`.
-
-The output will be saved in the `koncowa_konformacja.txt` file, where each line represents the 3D coordinates of consecutive amino acids in the folded protein.
 
