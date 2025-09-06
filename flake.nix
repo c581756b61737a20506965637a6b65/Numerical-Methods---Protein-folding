@@ -2,12 +2,18 @@
   description = "Projekt: modelowanie zwijania białek (HP model + Metropolis)";
 
   inputs = {
-    nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";  # lub stable, jeśli wolisz
+    nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable"; # lub stable, jeśli wolisz
     flake-utils.url = "github:numtide/flake-utils";
   };
 
-  outputs = { self, nixpkgs, flake-utils }:
-    flake-utils.lib.eachDefaultSystem (system:
+  outputs =
+    {
+      self,
+      nixpkgs,
+      flake-utils,
+    }:
+    flake-utils.lib.eachDefaultSystem (
+      system:
       let
         pkgs = import nixpkgs {
           inherit system;
@@ -18,9 +24,15 @@
           gcc
           cmake
           gdb
+          python3
+          python3Packages.numpy
+          python3Packages.matplotlib
+          imagemagick
+          ffmpeg
         ];
 
-      in {
+      in
+      {
         devShells.default = pkgs.mkShell {
           packages = buildInputs;
           shellHook = ''
@@ -31,4 +43,3 @@
       }
     );
 }
-
